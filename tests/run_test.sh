@@ -16,7 +16,7 @@ cleanup() {
 
 write_fail_test() {
   if [[ ${OPNREQ_TEST} == true ]]; then
-    echo ${TEST_NR} $TEST_NAME >> $PATHRT/fail_opnreq_test
+    echo "${TEST_NAME} ${TEST_NR} failed in run_test" >> $PATHRT/fail_opnreq_test_${TEST_NR}
   else
     echo "${TEST_NAME} ${TEST_NR} failed in run_test" >> $PATHRT/fail_test_${TEST_NR}
   fi
@@ -35,7 +35,12 @@ export TEST_NR=$4
 export COMPILE_NR=$5
 
 cd ${PATHRT}
-rm -f fail_test_${TEST_NR}
+OPNREQ_TEST=${OPNREQ_TEST:-false}
+if [[ ${OPNREQ_TEST} == true ]]; then
+  rm -f fail_opnreq_test_${TEST_NR}
+else
+  rm -f fail_test_${TEST_NR}
+fi
 
 [[ -e ${RUNDIR_ROOT}/run_test_${TEST_NR}.env ]] && source ${RUNDIR_ROOT}/run_test_${TEST_NR}.env
 source default_vars.sh
@@ -53,13 +58,14 @@ export JBNME=$(basename $RUNDIR_ROOT)_${TEST_NR}
 
 echo -n "${TEST_NAME}, $( date +%s )," > ${LOG_DIR}/job_${JOB_NR}_timestamp.txt
 
-OPNREQ_TEST=${OPNREQ_TEST:-false}
 if [[ ${OPNREQ_TEST} == false ]]; then
   REGRESSIONTEST_LOG=${LOG_DIR}/rt_${TEST_NR}_${TEST_NAME}${RT_SUFFIX}.log
 else
-  REGRESSIONTEST_LOG=${LOG_DIR}/opnReqTest_${TEST_NR}_${TEST_NAME}${RT_SUFFIX}.log
+  REGRESSIONTEST_LOG=${LOG_DIR}/opnReqTest_${TEST_NAME}${RT_SUFFIX}.log
 fi
 export REGRESSIONTEST_LOG
+
+rm -f ${REGRESSIONTEST_LOG}
 
 echo "Test ${TEST_NR} ${TEST_NAME} ${TEST_DESCR}"
 
@@ -82,7 +88,7 @@ cp ${PATHRT}/modules.fv3_${COMPILE_NR}             modules.fv3
 cp ${PATHTR}/modulefiles/ufs_common*               .
 
 # Get the shell file that loads the "module" command and purges modules:
-cp ${PATHRT}/../NEMS/src/conf/module-setup.sh.inc  module-setup.sh
+cp ${PATHRT}/module-setup.sh                       module-setup.sh
 
 SRCD="${PATHTR}"
 RUND="${RUNDIR}"
@@ -131,9 +137,24 @@ if [[ "Q${INPUT_NEST05_NML:-}" != Q ]] ; then
     atparse < ${PATHRT}/parm/${INPUT_NEST05_NML} > input_nest05.nml
 fi
 
+# diag table
+if [[ "Q${DIAG_TABLE:-}" != Q ]] ; then
+  cp ${PATHRT}/parm/diag_table/${DIAG_TABLE} diag_table
+fi
 # Field table
 if [[ "Q${FIELD_TABLE:-}" != Q ]] ; then
   cp ${PATHRT}/parm/field_table/${FIELD_TABLE} field_table
+fi
+
+# fix files
+if [[ $FV3 == true ]]; then
+  cp ${INPUTDATA_ROOT}/FV3_fix/*.txt .
+  cp ${INPUTDATA_ROOT}/FV3_fix/*.f77 .
+  cp ${INPUTDATA_ROOT}/FV3_fix/*.dat .
+  cp ${INPUTDATA_ROOT}/FV3_fix/fix_co2_proj/* .
+  if [[ $TILEDFIX != .true. ]]; then
+    cp ${INPUTDATA_ROOT}/FV3_fix/*.grb .
+  fi
 fi
 
 # Field Dictionary
@@ -150,19 +171,19 @@ if [[ $DATM_CDEPS = 'true' ]] || [[ $S2S = 'true' ]]; then
   if [[ $HAFS = 'false' ]]; then
     atparse < ${PATHRT}/parm/ice_in_template > ice_in
     atparse < ${PATHRT}/parm/${MOM_INPUT:-MOM_input_template_$OCNRES} > INPUT/MOM_input
-    atparse < ${PATHRT}/parm/${DIAG_TABLE:-diag_table_template} > diag_table
+    atparse < ${PATHRT}/parm/diag_table/${DIAG_TABLE:-diag_table_template} > diag_table
     atparse < ${PATHRT}/parm/data_table_template > data_table
   fi
 fi
 
 if [[ $HAFS = 'true' ]] && [[ $DATM_CDEPS = 'false' ]]; then
-  atparse < ${PATHRT}/parm/${DIAG_TABLE:-diag_table_template} > diag_table
+  atparse < ${PATHRT}/parm/diag_table/${DIAG_TABLE:-diag_table_template} > diag_table
 fi
 
 if [[ "${DIAG_TABLE_ADDITIONAL:-}Q" != Q ]] ; then
   # Append diagnostic outputs, to support tests that vary from others
   # only by adding diagnostics.
-  atparse < "${PATHRT}/parm/${DIAG_TABLE_ADDITIONAL:-}" >> diag_table
+  atparse < "${PATHRT}/parm/diag_table/${DIAG_TABLE_ADDITIONAL:-}" >> diag_table
 fi
 
 if [[ $DATM_CDEPS = 'true' ]]; then
@@ -217,12 +238,24 @@ else
     submit_and_wait job_card
   else
     chmod u+x job_card
-    ./job_card
+    ( ./job_card 2>&1 1>&3 3>&- | tee err ) 3>&1 1>&2 | tee out
+    # The above shell redirection copies stdout to "out" and stderr to "err"
+    # while still sending them to stdout and stderr. It does this without
+    # relying on bash-specific extensions or non-standard OS features.
   fi
 
 fi
 
-check_results
+if [[ $skip_check_results = false ]]; then
+  check_results
+else
+  echo                                               >> ${REGRESSIONTEST_LOG}
+  grep "The total amount of wall time" ${RUNDIR}/out >> ${REGRESSIONTEST_LOG}
+  grep "The maximum resident set size" ${RUNDIR}/out >> ${REGRESSIONTEST_LOG}
+  echo                                               >> ${REGRESSIONTEST_LOG}
+  echo "Test ${TEST_NR} ${TEST_NAME} RUN_SUCCESS"    >> ${REGRESSIONTEST_LOG}
+  echo;echo;echo                                     >> ${REGRESSIONTEST_LOG}
+fi
 
 if [[ $SCHEDULER != 'none' ]]; then
   cat ${RUNDIR}/job_timestamp.txt >> ${LOG_DIR}/job_${JOB_NR}_timestamp.txt
