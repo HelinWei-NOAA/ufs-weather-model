@@ -10,12 +10,20 @@ export CNTL_DIR=control_c384
 
 export LIST_FILES="sfcf000.nc \
                    sfcf012.nc \
+                   sfcf018.nc \
+                   sfcf034.nc \
                    atmf000.nc \
                    atmf012.nc \
+                   atmf018.nc \
+                   atmf024.nc \
                    GFSFLX.GrbF00 \
                    GFSFLX.GrbF12 \
+                   GFSFLX.GrbF18 \
+                   GFSFLX.GrbF24 \
                    GFSPRS.GrbF00 \
-                   GFSPRS.GrbF12"
+                   GFSPRS.GrbF12 \
+                   GFSPRS.GrbF18 \
+                   GFSPRS.GrbF24"
 
 export_fv3
 export TASKS=${TASKS_c384}
@@ -24,7 +32,7 @@ export INPES=${INPES_c384}
 export JNPES=${JNPES_c384}
 export WRITE_GROUP=1
 export WRTTASK_PER_GROUP=48
-export FHMAX=12
+export FHMAX=24
 export NPZ=127
 export NPZP=128
 export NPX=385

@@ -138,7 +138,8 @@ if [[ $MACHINE_ID = wcoss_cray ]]; then
   module load python/3.6.3
 
   DISKNM=/gpfs/hps3/emc/nems/noscrub/emc.nemspara/RT
-  QUEUE=debug
+# QUEUE=debug
+  QUEUE=dev
   COMPILE_QUEUE=dev
   PARTITION=
   ACCNR=GFS-DEV
@@ -171,7 +172,7 @@ elif [[ $MACHINE_ID = wcoss_dell_p3 ]]; then
   ECF_PORT=$(grep $USER /usrx/local/sys/ecflow/assigned_ports.txt | awk '{print $2}')
 
   DISKNM=/gpfs/dell2/emc/modeling/noscrub/emc.nemspara/RT
-  QUEUE=debug
+  QUEUE=dev
   COMPILE_QUEUE=dev_transfer
   PARTITION=
   ACCNR=GFS-DEV
@@ -248,7 +249,7 @@ elif [[ $MACHINE_ID = hera.* ]]; then
   QUEUE=batch
   COMPILE_QUEUE=batch
 
-  #ACCNR=fv3-cpu
+  ACCNR=fv3-cpu
   PARTITION=
   dprefix=/scratch1/NCEPDEV
   DISKNM=$dprefix/nems/emc.nemspara/RT
@@ -505,7 +506,7 @@ JOB_NR=0
 TEST_NR=0
 COMPILE_NR=0
 COMPILE_PREV_WW3_NR=''
-rm -f fail_test* fail_compile*
+#rm -f fail_test* fail_compile*
 
 export LOG_DIR=${PATHRT}/log_$MACHINE_ID
 rm -rf ${LOG_DIR}
