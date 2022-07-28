@@ -1,0 +1,25 @@
+###################################################################################################################################################################################
+# NoahMP tests                                                                                                                                                                      #
+###################################################################################################################################################################################
+
+#COMPILE | -DAPP=ATM -DCCPP_SUITES=FV3_GFS_v16,FV3_GFS_v16_noahmp,FV3_GFS_v15_thompson_mynn,FV3_GFS_v15_thompson_mynn_noahmp  -D32BIT=ON              |                | fv3 |
+#COMPILE | -DAPP=ATM -DCCPP_SUITES=FV3_GFS_v15_thompson_mynn,FV3_GFS_v15_thompson_mynn_noahmp -D32BIT=ON              |                | fv3 |
+#RUN     | control                                                                                                                 |                                         | fv3 |
+#RUN     | control_noahmp                                                                                                          |                                         | fv3 |
+#RUN     | control_c384                                                                                                            |                             | fv3 |
+#RUN     | control_noahmp_c384                                                                                                     |                             | fv3 |
+#
+#RUN     | regional_control                                                                                                        |                                         | fv3 |
+#RUN     | regional_control_noahmp                                                                                                 |                                         | fv3 |
+###################################################################################################################################################################################
+# DEBUG tests                                                                                                                                                                     #
+###################################################################################################################################################################################
+
+COMPILE | -DAPP=ATM -DDEBUG=ON -DCCPP_SUITES=FV3_GFS_v16,FV3_GFS_v16_noahmp,FV3_GFS_v15_thompson_mynn,FV3_GFS_v15_thompson_mynn_noahmp  -D32BIT=ON     |                   | fv3 |
+#COMPILE | -DAPP=ATM -DDEBUG=ON -DCCPP_SUITES=FV3_GFS_v15_thompson_mynn_noahmp  -D32BIT=ON     |                   | fv3 |
+
+RUN     | control_debug                                                                                                           |                                         | fv3 |
+RUN     | control_noahmp_debug                                                                                                           |                                         | fv3 |
+
+RUN     | regional_debug                                                                                                          |                                         | fv3 |
+RUN     | regional_noahmp_debug                                                                                                          |                                         | fv3 |
