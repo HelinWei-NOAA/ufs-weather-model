@@ -1,0 +1,2 @@
+COMPILE | -DAPP=S2SWA -DCCPP_SUITES=FV3_GFS_v17_coupled_p8,FV3_GFS_cpld_rasmgshocnsstnoahmp_ugwp                                  |                                         | fv3 |
+RUN     | cpld_control_p8                                                                                                         |                                         | fv3 |
