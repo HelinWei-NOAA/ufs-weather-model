@@ -134,7 +134,7 @@ source module-setup.sh
 CREATE_BASELINE=false
 ROCOTO=false
 ECFLOW=false
-KEEP_RUNDIR=false
+KEEP_RUNDIR=true
 SINGLE_NAME=''
 TEST_35D=false
 export skip_check_results=false
