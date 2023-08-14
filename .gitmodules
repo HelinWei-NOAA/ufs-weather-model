@@ -1,7 +1,7 @@
 [submodule "FV3"]
   path = FV3
-  url = https://github.com/RongqianYang-NOAA/fv3atm
-  branch = ufs-noahmp-soil-level
+  url = https://github.com/HelinWei-NOAA/fv3atm
+  branch = nsoil9
 [submodule "WW3"]
   path = WW3
   url = https://github.com/NOAA-EMC/WW3
