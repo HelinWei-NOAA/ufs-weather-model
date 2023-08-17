@@ -184,6 +184,7 @@ deflate_level=1
   ivegsrc      = 1
   isot         = 1
   lsoil_input  = 4
+  zsoil_input  = 0.1,0.4,1.,2.
   lsm          = @[LSM]
   iopt_dveg    = @[IOPT_DVEG]
   iopt_crs     = @[IOPT_CRS]
