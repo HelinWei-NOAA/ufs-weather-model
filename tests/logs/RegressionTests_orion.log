@@ -1,17 +1,38 @@
-Wed Aug 16 20:12:40 CDT 2023
+Sat Aug 19 14:01:02 CDT 2023
 Start Regression test
 
-Testing UFSWM Hash: 1afd3f7255773505935fbda99f46f577fdb393ac
+Testing UFSWM Hash: 24eaa878107c126b275ad48d19b42b1faa359329
 Testing With Submodule Hashes:
  37cbb7d6840ae7515a9a8f0dfd4d89461b3396d1 ../AQM (v0.2.0-37-g37cbb7d)
  2aa6bfbb62ebeecd7da964b8074f6c3c41c7d1eb ../CDEPS-interface/CDEPS (cdeps0.4.17-38-g2aa6bfb)
  5840cd1931e2e32b9dfded0c19049d0f1ec3d04c ../CICE-interface/CICE (CICE6.0.0-440-g5840cd1)
  9923d6d17700daf502d9a016138bf8eb8aad7f09 ../CMEPS-interface/CMEPS (cmeps_v0.4.1-2295-g9923d6d)
  cabd7753ae17f7bfcc6dad56daf10868aa51c3f4 ../CMakeModules (v1.0.0-28-gcabd775)
- b736bd40df486f051fe64157ec794647678f82bc ../FV3 (heads/nsoilg)
+ 777f5f6f361e25b633376804ba4a37a84534e9f8 ../FV3 (heads/nsoilg)
  b94145fca46169bbc53ec6b8d4ed849715dc5130 ../GOCART (rt-v5_29_1_BPL91_1-exRT4-514-gb94145f)
  24437531dcf8580aadaf6ebeb9de544ccfc674f9 ../HYCOM-interface/HYCOM (2.3.00-120-g2443753)
  fdbfa2523650b81a0771f3fb1791ea3e3dce66db ../MOM6-interface/MOM6 (dev/master/repository_split_2014.10.10-9713-gfdbfa2523)
  569e354ababbde7a7cd68647533769a5c966468d ../NOAHMP-interface/noahmp (v3.7.1-303-g569e354)
  c4b116886b5ef9af5fb4942d7161074df3402732 ../WW3 (6.07.1-325-gc4b11688)
  3bfa4468d85e5b63980c28434f494967f38b10a3 ../stochastic_physics (ufs-v2.0.0-171-g3bfa446)
+Compile atm_debug_dyn32_intel elapsed time 337 seconds. -DAPP=ATM -DDEBUG=ON -D32BIT=ON -DCCPP_SUITES=FV3_HRRR,FV3_GFS_v16,FV3_GFS_v16_csawmg,FV3_GFS_v16_ras,FV3_GFS_v17_p8,FV3_GFS_v15_thompson_mynn_lam3km,FV3_RAP,FV3_RAP_unified_ugwp,FV3_RAP_cires_ugwp,FV3_RAP_flake,FV3_RAP_clm_lake,FV3_RAP_noah,FV3_RAP_sfcdiff,FV3_RAP_noah_sfcdiff_cires_ugwp,FV3_RRFS_v1beta -DMPI=ON -DCMAKE_BUILD_TYPE=Debug
+
+baseline dir = /work/noaa/nems/emc.nemspara/RT/NEMSfv3gfs/develop-20230713/control_debug_p8_intel
+working dir  = /work/noaa/stmp/hwei/stmp/hwei/FV3_RT/rt_366443/control_debug_p8_intel
+Checking test 001 control_debug_p8_intel results ....
+ Comparing sfcf000.nc ............ALT CHECK......NOT OK
+ Comparing sfcf001.nc ............ALT CHECK......NOT OK
+ Comparing atmf000.nc ............ALT CHECK......NOT OK
+ Comparing atmf001.nc ............ALT CHECK......NOT OK
+
+  0: The total amount of wall time                        = 176.917165
+  0: The maximum resident set size (KB)                   = 1630440
+
+Test 001 control_debug_p8_intel FAIL
+
+FAILED TESTS: 
+001 control_debug_p8_intel failed in check_result
+
+REGRESSION TEST FAILED
+Sat Aug 19 14:16:10 CDT 2023
+Elapsed time: 00h:15m:10s. Have a nice day!
