@@ -9,6 +9,12 @@ export TEST_DESCR="Compare global control results with previous trunk version"
 export CNTL_DIR=control_p8
 
 export LIST_FILES="sfcf000.nc \
+                   sfcf003.nc \
+                   sfcf006.nc \
+                   sfcf009.nc \
+                   sfcf012.nc \
+                   sfcf015.nc \
+                   sfcf018.nc \
                    sfcf021.nc \
                    sfcf024.nc \
                    atmf000.nc \
@@ -65,7 +71,7 @@ export SHOUR=06
 export RESTART_INTERVAL="12 -1"
 export OUTPUT_GRID='gaussian_grid'
 export WRITE_DOPOST=.true.
-export OUTPUT_FH='0 21 24'
+export OUTPUT_FH='0 03 06 09 12 15 18 21 24'
 
 # P7 default
 export IALB=2
@@ -160,7 +166,7 @@ export WRITE_NSFLIP=.true.
 export FV3_RUN=control_run.IN
 export CCPP_SUITE=FV3_GFS_v17_p8
 export FIELD_TABLE=field_table_thompson_noaero_tke
-export DIAG_TABLE=diag_table_p8_template
+export DIAG_TABLE=diag_table_p8_soil9_template
 # use same namelist for standalone,coupled P7
 export INPUT_NML=cpld_control.nml.IN
 
