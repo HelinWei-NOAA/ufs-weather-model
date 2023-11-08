@@ -1,24 +1,24 @@
-Mon Nov  6 20:27:10 EST 2023
+Wed Nov  8 16:16:05 EST 2023
 Start Regression test
 
-Testing UFSWM Hash: de4b4314c3eb76534a8eaf6a81108ebd8cb7f4d9
+Testing UFSWM Hash: f8dcab78e0d3161c47b0f47c599e1df38a354c19
 Testing With Submodule Hashes:
  37cbb7d6840ae7515a9a8f0dfd4d89461b3396d1 AQM (v0.2.0-37-g37cbb7d)
  2aa6bfbb62ebeecd7da964b8074f6c3c41c7d1eb CDEPS-interface/CDEPS (cdeps0.4.17-38-g2aa6bfb)
  50aa2c97882fbc9d4918813a22169fe97b424564 CICE-interface/CICE (CICE6.0.0-444-g50aa2c9)
- 9923d6d17700daf502d9a016138bf8eb8aad7f09 CMEPS-interface/CMEPS (cmeps_v0.4.1-1402-g9923d6d)
+ e5d08d4233b0c783a4840dcbc3252a170e3c3bb1 CMEPS-interface/CMEPS (cmeps_v0.4.1-1406-ge5d08d4)
  cabd7753ae17f7bfcc6dad56daf10868aa51c3f4 CMakeModules (v1.0.0-28-gcabd775)
-+579b5e5613c1719725eb47f65e86a60453a058bb FV3 (remotes/origin/nsoil9-33-g579b5e5)
+ 4072228943d0b8541d2300db2a2ae7c340c0c259 FV3 (remotes/origin/nsoil9-34-g4072228)
  041422934cae1570f2f0e67239d5d89f11c6e1b7 GOCART (sdr_v2.1.2.6-119-g0414229)
  35789c757766e07f688b4c0c7c5229816f224b09 HYCOM-interface/HYCOM (2.3.00-121-g35789c7)
  02d4dc455bb517b4c641c919dc6b9dc829e1e0d4 MOM6-interface/MOM6 (dev/master/repository_split_2014.10.10-9803-g02d4dc455)
  569e354ababbde7a7cd68647533769a5c966468d NOAHMP-interface/noahmp (v3.7.1-303-g569e354)
  02693d837f2cd99d20ed08515878c2b5e9525e64 WW3 (6.07.1-343-g02693d83)
  62b89146be1250f354cd50a14096c0c25f2f3952 stochastic_physics (ufs-v2.0.0-191-g62b8914)
-Compile atm_dyn32_intel elapsed time 583 seconds. -DAPP=ATM -DCCPP_SUITES=FV3_GFS_v16,FV3_GFS_v16_flake,FV3_GFS_v17_p8,FV3_GFS_v17_p8_rrtmgp,FV3_GFS_v15_thompson_mynn_lam3km,FV3_WoFS_v0,FV3_GFS_v17_p8_mynn -D32BIT=ON -DMPI=ON -DCMAKE_BUILD_TYPE=Release
+Compile atm_dyn32_intel elapsed time 643 seconds. -DAPP=ATM -DCCPP_SUITES=FV3_GFS_v16,FV3_GFS_v16_flake,FV3_GFS_v17_p8,FV3_GFS_v17_p8_rrtmgp,FV3_GFS_v15_thompson_mynn_lam3km,FV3_WoFS_v0,FV3_GFS_v17_p8_mynn -D32BIT=ON -DMPI=ON -DCMAKE_BUILD_TYPE=Release
 
 baseline dir = /scratch2/NAGAPE/epic/UFS-WM_RT/NEMSfv3gfs/develop-20231102/control_p8_intel
-working dir  = /scratch1/NCEPDEV/stmp2/Helin.Wei/FV3_RT/rt_137168/control_p8_intel
+working dir  = /scratch1/NCEPDEV/stmp2/Helin.Wei/FV3_RT/rt_11313/control_p8_intel
 Checking test 001 control_p8_intel results ....
  Comparing sfcf000.nc ............ALT CHECK......NOT OK
  Comparing sfcf003.nc ............MISSING baseline
@@ -71,8 +71,8 @@ Checking test 001 control_p8_intel results ....
  Comparing RESTART/20210323.060000.sfc_data.tile5.nc ............ALT CHECK......NOT OK
  Comparing RESTART/20210323.060000.sfc_data.tile6.nc ............ALT CHECK......NOT OK
 
-  0: The total amount of wall time                        = 172.468740
-  0: The maximum resident set size (KB)                   = 1592544
+  0: The total amount of wall time                        = 176.515039
+  0: The maximum resident set size (KB)                   = 1610628
 
 Test 001 control_p8_intel FAIL
 
@@ -80,5 +80,5 @@ FAILED TESTS:
 001 control_p8_intel failed in check_result
 
 REGRESSION TEST FAILED
-Mon Nov  6 21:00:18 EST 2023
-Elapsed time: 00h:33m:09s. Have a nice day!
+Wed Nov  8 16:35:20 EST 2023
+Elapsed time: 00h:19m:17s. Have a nice day!
