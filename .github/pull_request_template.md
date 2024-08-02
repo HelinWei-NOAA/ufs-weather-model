@@ -1,83 +1,153 @@
-## Description
+<!-- INSTRUCTIONS: 
+- PLEASE READ/FOLLOW THE DIRECTIONS IN EACH SECTION
+- Complete the 'Commit Queue Requirements' below
+- Please use github markup as much as possible (https://docs.github.com/en/get-started/writing-on-github)
+- Please leave your PR in a draft state until all underlying work is completed.
+-->
+## Commit Queue Requirements:
 <!--
-Provide a detailed description of what this PR does. What bug does it fix, or what feature does it add? Is a change of answers expected from this PR? Are any library updates included in this PR (modulefiles etc.)?
--->
-
-### Input data additions/changes
-- [ ] No changes are expected to input data.
-- [ ] Changes are expected to input data:
-  - [ ] New input data.
-  - [ ] Updated input data.
-
-### Anticipated changes to regression tests:
-- [ ] No changes are expected to any regression test.
-- [ ] Changes are expected to the following tests:
-<!-- Please insert what RT's change and why you expect them to change -->
-
-## Subcomponents involved:
-- [ ] AQM
-- [ ] CDEPS
-- [ ] CICE
-- [ ] CMEPS
-- [ ] CMakeModules
-- [ ] FV3
-- [ ] GOCART
-- [ ] HYCOM
-- [ ] MOM6
-- [ ] NOAHMP
-- [ ] WW3
-- [ ] stochastic_physics
-- [ ] none
-
-### Library Updates/Changes
-<!-- Library updates take time. If this PR needs updates to libraries, please make sure to accomplish the following tasks -->
-- [ ] Not Needed
-- [ ] Create separate issue in [JCSDA/spack-stack](https://github.com/JCSDA/spack-stack) asking for update to library. Include library name, library version.
-- [ ] Add issue link from JCSDA/spack-stack following this item
-<!-- for example: "- JCSDA/spack-stack/issue/1757" -->
-
-### Combined with PR's (If Applicable):
-
-## Commit Queue Checklist:
-<!-- 
-Please complete all items in list. Make sure to attach logs from RT testing in comment, not in repository. Once all boxes are checked, please add the label "Ready for Commit Queue".
--->
-- [ ] Link PR's from all sub-components involved in section below
-- [ ] Confirm reviews completed in ALL sub-component PR's
-- [ ] Add all appropriate labels to this PR.
-- [ ] Run full RT suite on either Hera/Cheyenne AND attach log to a PR comment.
-- [ ] Add list of any failed regression tests to "Anticipated changes to regression tests" section.
-
-## Linked PR's and Issues:
+- Please complete the items that follow this.
+- Please "check off" completed items. Use [X] for a filled in checkbox or leave it [ ] for an empty checkbox
+- Your PR will not be considered until all requirements are met.
+- THIS IS YOUR RESPONSIBILITY
+ -->
+- [ ] Fill out all sections of this template.
+- [ ] All sub component pull requests have been reviewed by their code managers.
+- [ ] Run the full Intel+GNU RT suite (compared to current baselines) on either Hera/Derecho/Hercules
+- [ ] Commit 'test_changes.list' from previous step
+---
+## Description:
 <!--
-Please link dependent pull requests.
-EXAMPLE: "- Depends on NOAA-EMC/fv3atm/pull/<pullrequest_number>"
-
-Please link the related issues to be closed with this PR, whether in this repository, or in another repository.
-EXAMPLE: "- Closes NOAA-EMC/fv3atm/issues/<issue_number>"
-
-PLEASE MAKE SURE TO USE THE - with a space before the "Depends on" or "Closes" as they show up well on github.
+Please provide a detailed verbose description of what this PR does
 -->
 
-## Testing Day Checklist:
+
+### Commit Message:
 <!--
-Please consult the ufs-weather-model [wiki](https://github.com/ufs-community/ufs-weather-model/wiki/Making-code-changes-in-the-UFS-weather-model-and-its-subcomponents) if you are unsure how to do this.
+Please provide concise information for The UFS-WM and/or each sub-component:
+Please delete what is not needed.
 -->
-- [ ] This PR is up-to-date with the top of all sub-component repositories except for those sub-components which are the subject of this PR.
-- [ ] Move new/updated input data on RDHPCS Hera and propagate input data changes to all supported systems.
+```
+* UFSWM - 
+  * AQM - 
+  * CDEPS - 
+  * CICE - 
+  * CMEPS - 
+  * CMakeModules - 
+  * FV3 - 
+    * ccpp-physics - 
+    * atmos_cubed_sphere - 
+  * GOCART - 
+  * HYCOM - 
+  * MOM6 - 
+  * NOAHMP - 
+  * WW3 - 
+  * stochastic_physics - 
+```
 
-### Testing Log (for CM's):
+### Priority:
+<!--
+Please provide the priority you would prefer this pull request to have.
+* Critical Bugfix: Model is wrong.
+* High: Time-sensitive project.
+* Normal.
+Please delete the ones that are not applicable
+-->
+* Critical Bugfix: Reason
+* High: Reason
+* Normal
+
+## Git Tracking
+### UFSWM:
+<!--
+Please add the UFS-WM github issue here if there is one
+Please delete the one that is not applicable.
+-->
+* Closes #
+* None
+
+### Sub component Pull Requests:
+<!--
+Please provide a list of sub-components involved with this pull request.
+Please provide links to the sub-component pull requests as shown below.
+Please delete what is not needed.
+Example:
+* FV3: NOAA-EMC/fv3atm#734
+  * ccpp-physics: ufs-community/ccpp-physics#33
+* WW3: NOAA-EMC/WW3#321
+-->
+* AQM:
+* CDEPS:
+* CICE:
+* CMEPS:
+* CMakeModules:
+* FV3:
+  * ccpp-physics:
+  * atmos_cubed_sphere:
+* GOCART:
+* HYCOM:
+* MOM6:
+* NOAHMP:
+* WW3:
+* stochastic_physics:
+* None
+
+### UFSWM Blocking Dependencies:
+<!--
+If there are any UFSWM PR's that are needed to be completed before this one, please add links
+to them here
+Please delete what is not needed.
+-->
+* Blocked by #
+* None
+
+---
+## Changes
+### Regression Test Changes (Please commit test_changes.list):
+<!--
+Please let us know if this PR creates new baselines, changes baselines or not.
+Please delete what is not needed.
+Please make sure you have properly submitted test_changes.list
+-->
+* PR Adds New Tests/Baselines.
+* PR Updates/Changes Baselines.
+* No Baseline Changes.
+
+### Input data Changes:
+<!--
+If there are any changes to input-data for a test, please provide information here.
+Please delete what is not needed.
+-->
+* None.
+* New input data.
+* Updated input data.
+
+### Library Changes/Upgrades:
+<!-- Library updates take time. Please provide library and version information here.
+** SPECIAL INSTRUCTIONS **
+If this PR needs updates to libraries please make sure to accomplish the following tasks:
+- Create separate issue in (https://github.com/JCSDA/spack-stack) asking for update to library. Include library name, library version.
+- Add issue link from JCSDA/spack-stack following this item <!-- for example: "* JCSDA/spack-stack#1757"
+
+Please delete what is not needed.
+-->
+* Required
+  * Library names w/versions:
+  * Git Stack Issue (JCSDA/spack-stack#)
+* No Updates
+  
+---
+<!-- STOP!!! THE FOLLOWING IS FOR CODE MANAGERS ONLY. PLEASE DO NOT FILL OUT -->
+## Testing Log:
 - RDHPCS
   - [ ] Hera
   - [ ] Orion
+  - [ ] Hercules
   - [ ] Jet
   - [ ] Gaea
-  - [ ] Cheyenne
+  - [ ] Derecho
 - WCOSS2
   - [ ] Dogwood/Cactus
   - [ ] Acorn
-- CI
-  - [ ] Completed
-- opnReqTest
-  - [ ] N/A
-  - [ ] Log attached to comment
+- [ ] CI
+- [ ] opnReqTest (complete task if unnecessary)
